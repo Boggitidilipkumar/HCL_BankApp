@@ -1,0 +1,78 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>HCL Internal Bank Application</title>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px dashed #e9967a;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #e9967a;
+  color: lavender;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: black;
+}
+td{
+  color: white;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  }
+  .error{
+  color:#EF1313;
+  font-style:italic;
+  }
+  .image{
+  background-image: url('data:image/png;base64,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');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: 100% 100%;
+  }
+}
+</style>
+</head>
+<body class="image">
+<h1 align="center">Hcl bankapp Transfer</h1>
+<form:form action="transfer" method="post" modelAttribute="transferbean">
+	<table>
+		<tr>
+			<td>Enter From Account:</td>
+			<td><form:input path="fromAccountId"/><form:errors path="fromAccountId" class="error"/></td>
+		</tr>
+		<tr>
+			<td>Enter TO Account:</td>
+			<td><form:input path="toAccountId"/><form:errors path="toAccountId" class="error"/></td>
+		</tr>
+		<tr>
+			<td>Enter Amount:</td>
+			<td><form:input path="amount"/><form:errors path="amount" class="error"/></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="Transfer"></td>
+		</tr>
+	</table>
+</form:form>
+</body>
+</html>
